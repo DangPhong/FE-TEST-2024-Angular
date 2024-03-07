@@ -3,7 +3,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import * as blogsActions from './blog-detail.actions';
 import { BackendService } from '../../services/backend/backend.service';
-import { GetBlogDetailSuccess } from './blog-detail.model';
+import {
+  GetBlogDetailFailure,
+  GetBlogDetailSuccess,
+} from './blog-detail.model';
 
 @Injectable()
 export class BlogDetailEffects {
@@ -20,7 +23,7 @@ export class BlogDetailEffects {
           map((res: GetBlogDetailSuccess) => {
             return blogsActions.getBlogDetailSuccess({ blogDetail: res });
           }),
-          catchError((err) =>
+          catchError((err: GetBlogDetailFailure) =>
             of(blogsActions.getBlogDetailFailure({ reason: err.message }))
           )
         )

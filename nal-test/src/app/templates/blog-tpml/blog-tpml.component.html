@@ -1,1 +1,15 @@
-<p>blog-tpml works!</p>
+
+  <div class="header">
+    <h2>{{ titlePage }}</h2>
+  </div>
+  <div class="row">
+    <ul class="list-unstyled">
+      <li class="media" *ngFor="let item of dataItems">
+        <img [src]="item.image?.url" class="mr-3 img-fluid" alt="..." />
+        <div class="media-body">
+          <h5 class="mt-0 mb-1">{{ item.title }}</h5>
+          <p>{{ item.content }}</p>
+        </div>
+      </li>
+    </ul>
+  </div> 

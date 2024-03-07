@@ -55,15 +55,15 @@ export interface GetBlogsReponse {
 // }
 
 export interface PostPutBlogBody {
-  'blog[title]': string;
-  'blog[content]': string;
-  'blog[image]': string;
+  // 'blog[title]': string;
+  // 'blog[content]': string;
+  // 'blog[image]': string;
 
-  //   blog: {
-  //     title: string;
-  //     content: string;
-  //     image: string;
-  //   };
+    blog: {
+      title: string;
+      content: string;
+      image: string;
+    };
 }
 
 export interface ItemsBlogPostBlogsResponseSuccess {

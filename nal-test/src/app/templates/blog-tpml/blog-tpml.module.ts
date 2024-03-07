@@ -5,5 +5,6 @@ import { BlogTpmlComponent } from './blog-tpml.component';
 @NgModule({
   declarations: [BlogTpmlComponent],
   imports: [CommonModule],
+  exports: [BlogTpmlComponent],
 })
 export class BlogTpmlModule {}

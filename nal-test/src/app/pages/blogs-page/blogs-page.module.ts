@@ -5,12 +5,14 @@ import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { blogsFeatureKey, blogsReducer } from '../../stores/blogs';
+import { BlogTpmlModule } from 'src/app/templates/blog-tpml/blog-tpml.module';
 
 @NgModule({
   declarations: [BlogsPageComponent],
   imports: [
     CommonModule,
     EffectsModule,
+    BlogTpmlModule,
     StoreModule.forFeature(blogsFeatureKey, blogsReducer),
     RouterModule.forChild([
       {

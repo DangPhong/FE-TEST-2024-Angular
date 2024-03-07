@@ -9,7 +9,7 @@ import { GetBlogDetailSuccess } from './blog-detail.model';
 export const blogsFeatureKey = 'blogs-detail';
 
 // States
-export interface BlogsState {
+export interface BlogDetailState {
   blogDetail: GetBlogDetailSuccess;
   isLoading: boolean;
 }
@@ -26,12 +26,12 @@ export const initialGetBlogDetailData: GetBlogDetailSuccess = {
   updated_at: '',
 };
 
-export const initialState: BlogsState = {
+export const initialState: BlogDetailState = {
   blogDetail: initialGetBlogDetailData,
   isLoading: false,
 };
 
-export const blogDetailReducer = createReducer<BlogsState>(
+export const blogDetailReducer = createReducer<BlogDetailState>(
   initialState,
   on(getBlogDetail, (state) => {
     return {

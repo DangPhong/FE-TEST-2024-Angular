@@ -1,9 +1,9 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BlogsState, blogsFeatureKey } from './blog-detail.reducers';
+import { BlogDetailState, blogsFeatureKey } from './blog-detail.reducers';
 import { GetBlogDetailSuccess } from './blog-detail.model';
 
 export const selectBlogDetailState =
-  createFeatureSelector<BlogsState>(blogsFeatureKey);
+  createFeatureSelector<BlogDetailState>(blogsFeatureKey);
 
 export const selectBlogDetail = createSelector(
   selectBlogDetailState,
