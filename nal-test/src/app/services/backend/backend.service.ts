@@ -2,9 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {
-  GetBlogsReponse as GetBlogsResponse,
+  GetBlogsResponse as GetBlogsResponse,
   GetBlogsRqParam,
-  ItemsBlogReponse,
+  ItemsBlogResponse,
   PostPutBlogBody,
   PostBlogsResponseSuccess,
   BlogResponseFailure,
@@ -269,9 +269,9 @@ export class BackendService {
     });
   }
 
-  public getBlogDetail(id: number): Observable<ItemsBlogReponse> {
+  public getBlogDetail(id: number): Observable<ItemsBlogResponse> {
     const endPoint = `${this.endPointApi}/${`blogs/${id}`}`;
-    return this.httpClient.get<ItemsBlogReponse>(endPoint);
+    return this.httpClient.get<ItemsBlogResponse>(endPoint);
   }
 
   public upsertBlog(

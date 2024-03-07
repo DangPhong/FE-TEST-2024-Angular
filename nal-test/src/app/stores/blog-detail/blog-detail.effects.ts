@@ -24,7 +24,7 @@ export class BlogDetailEffects {
             return blogsActions.getBlogDetailSuccess({ blogDetail: res });
           }),
           catchError((err: GetBlogDetailFailure) =>
-            of(blogsActions.getBlogDetailFailure({ reason: err.message }))
+            of(blogsActions.getBlogDetailFailure({ payload: err }))
           )
         )
       )

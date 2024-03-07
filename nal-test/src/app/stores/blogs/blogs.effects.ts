@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import * as blogsActions from './blogs.actions';
 import { BackendService } from '../../services/backend/backend.service';
-import { GetBlogsReponse as GetBlogsResponse } from '../../services/backend/backend.service.i';
+import { GetBlogsResponse as GetBlogsResponse } from '../../services/backend/backend.service.i';
 
 @Injectable()
 export class BlogsEffects {

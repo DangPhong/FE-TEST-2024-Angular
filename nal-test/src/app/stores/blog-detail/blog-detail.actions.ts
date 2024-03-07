@@ -1,5 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { FailedReason, GetBlogDetailSuccess } from './blog-detail.model';
+import {
+  GetBlogDetailFailure,
+  GetBlogDetailSuccess,
+} from './blog-detail.model';
 
 const prefix = '[Blogs Detail]';
 
@@ -15,7 +18,7 @@ export const getBlogDetailSuccess = createAction(
 
 export const getBlogDetailFailure = createAction(
   `${getBlogDetail.type} failure`,
-  props<FailedReason>()
+  props<{ payload: GetBlogDetailFailure }>()
 );
 
 export const cancelEntry = createAction(`${prefix} Cancel entry`);

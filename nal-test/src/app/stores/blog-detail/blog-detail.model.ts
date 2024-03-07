@@ -8,11 +8,6 @@ export interface GetBlogDetailSuccess {
   updated_at?: string;
 }
 
-export interface FailedReason {
-  code?: number;
-  reason?: string;
-}
-
 export interface GetBlogDetailFailure {
   message: string;
   type: string;

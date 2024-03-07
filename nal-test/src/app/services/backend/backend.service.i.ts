@@ -8,7 +8,7 @@ export interface GetBlogsRqParam {
   sort_direction?: string;
 }
 
-export interface ItemsBlogReponse {
+export interface ItemsBlogResponse {
   id?: number;
   title?: string;
   content?: string;
@@ -27,43 +27,19 @@ export interface Pagination {
   next: number;
 }
 
-export interface GetBlogsReponse {
+export interface GetBlogsResponse {
   data: {
-    items: ItemsBlogReponse[];
+    items: ItemsBlogResponse[];
   };
   pagination: Pagination;
 }
 
-// export interface GetBlogsRqBody {
-//   data: {
-//     items: {
-//       email: string;
-//       name: string;
-//       avatar: { url: string };
-//       created_at: string;
-//       updated_at: string;
-//     }[];
-//     pagination: {
-//       count: number;
-//       page: number;
-//       offset: number;
-//       total: number;
-//       prev: number;
-//       next: number;
-//     };
-//   };
-// }
-
 export interface PostPutBlogBody {
-  // 'blog[title]': string;
-  // 'blog[content]': string;
-  // 'blog[image]': string;
-
-    blog: {
-      title: string;
-      content: string;
-      image: string;
-    };
+  blog: {
+    title: string;
+    content: string;
+    image: string;
+  };
 }
 
 export interface ItemsBlogPostBlogsResponseSuccess {
