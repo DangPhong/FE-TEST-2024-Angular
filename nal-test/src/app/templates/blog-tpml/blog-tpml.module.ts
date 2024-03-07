@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BlogsComponent } from './blogs.component';
+import { BlogTpmlComponent } from './blog-tpml.component';
 
 @NgModule({
-  declarations: [BlogsComponent],
+  declarations: [BlogTpmlComponent],
   imports: [CommonModule],
 })
-export class BlogsModule {}
+export class BlogTpmlModule {}

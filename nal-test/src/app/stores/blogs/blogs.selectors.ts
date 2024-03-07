@@ -1,6 +1,16 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BlogData } from './blogs.model';
-import { blogsFeatureKey } from './blogs.reducers';
+import { BlogsState, blogsFeatureKey } from './blogs.reducers';
+import { GetBlogsData } from './blogs.model';
 
 export const selectBlogsState =
-  createFeatureSelector<BlogData>(blogsFeatureKey);
+  createFeatureSelector<BlogsState>(blogsFeatureKey);
+
+export const selectBlogs = createSelector(
+  selectBlogsState,
+  (projector): GetBlogsData => projector.blogs
+);
+
+export const selectIsLoading = createSelector(
+  selectBlogsState,
+  (projector): boolean => projector.isLoading
+);
