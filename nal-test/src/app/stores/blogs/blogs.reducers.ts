@@ -1,7 +1,7 @@
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { GetBlogsData } from './blogs.model';
 import { createReducer, on } from '@ngrx/store';
 import {
+  deleteBlog,
   deleteBlogFailure,
   deleteBlogSuccess,
   getBlogs,
@@ -16,11 +16,6 @@ export interface BlogsState {
   blogs: GetBlogsData;
   isLoading: boolean;
 }
-
-// export const blogsAdapter: EntityAdapter<BlogData> =
-//   createEntityAdapter<BlogData>({
-//     sortComparer: false,
-//   });
 
 export const initialGetBlogsData: GetBlogsData = {
   data: {
@@ -43,7 +38,7 @@ export const initialState: BlogsState = {
 
 export const blogsReducer = createReducer<BlogsState>(
   initialState,
-  on(getBlogs, (state) => {
+  on(getBlogs, deleteBlog, (state) => {
     return {
       ...state,
       isLoading: true,

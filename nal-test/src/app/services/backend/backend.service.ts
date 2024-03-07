@@ -7,7 +7,7 @@ import {
   ItemsBlogReponse,
   PostPutBlogBody,
   PostBlogsResponseSuccess,
-  PostBlogsResponseFailure,
+  BlogResponseFailure,
 } from './backend.service.i';
 
 @Injectable({
@@ -33,29 +33,31 @@ export class BackendService {
     });
   }
 
-  public getBlogDetail(id: number): Observable<ItemsBlogReponse[]> {
+  public getBlogDetail(id: number): Observable<ItemsBlogReponse> {
     const endPoint = `${this.endPointApi}/${`blogs/${id}`}`;
 
-    return this.httpClient.get<ItemsBlogReponse[]>(endPoint);
+    return this.httpClient.get<ItemsBlogReponse>(endPoint);
   }
 
   public postBlog(
     body: PostPutBlogBody
-  ): Observable<PostBlogsResponseSuccess | PostBlogsResponseFailure> {
+  ): Observable<PostBlogsResponseSuccess | BlogResponseFailure> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;
-    return this.httpClient.post<
-      PostBlogsResponseSuccess | PostBlogsResponseFailure
-    >(endPoint, body);
+    return this.httpClient.post<PostBlogsResponseSuccess | BlogResponseFailure>(
+      endPoint,
+      body
+    );
   }
 
   public putBlog(
     id: number,
     body: PostPutBlogBody
-  ): Observable<PostBlogsResponseSuccess | PostBlogsResponseFailure> {
+  ): Observable<PostBlogsResponseSuccess | BlogResponseFailure> {
     const endPoint = `${this.endPointApi}/${`blogs/${id}`}`;
-    return this.httpClient.put<
-      PostBlogsResponseSuccess | PostBlogsResponseFailure
-    >(endPoint, body);
+    return this.httpClient.put<PostBlogsResponseSuccess | BlogResponseFailure>(
+      endPoint,
+      body
+    );
   }
 
   public deleteBlog(id: number): Observable<null> {

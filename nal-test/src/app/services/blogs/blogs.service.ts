@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectBlogs, selectIsLoading } from '../../stores/blogs';
 import * as blogActions from '../../stores/blogs/blogs.actions';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,7 @@ export class BlogsService {
   constructor(private store: Store) {}
 
   getBlogData() {
-    this.store.select(selectBlogs);
+    return this.store.select(selectBlogs);
   }
 
   fetchBlogData() {
@@ -18,7 +19,7 @@ export class BlogsService {
   }
 
   getIsLoading() {
-    this.store.select(selectIsLoading);
+   return this.store.select(selectIsLoading);
   }
 
   deleteBlog(id: number) {

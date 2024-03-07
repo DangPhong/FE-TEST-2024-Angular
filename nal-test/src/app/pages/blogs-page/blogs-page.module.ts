@@ -11,7 +11,7 @@ import { blogsFeatureKey, blogsReducer } from '../../stores/blogs';
   imports: [
     CommonModule,
     EffectsModule,
-    // StoreModule.forFeature(blogsFeatureKey, blogsReducer),
+    StoreModule.forFeature(blogsFeatureKey, blogsReducer),
     RouterModule.forChild([
       {
         path: '',

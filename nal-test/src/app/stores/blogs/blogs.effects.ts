@@ -12,7 +12,7 @@ export class BlogsEffects {
     private backendService: BackendService
   ) {}
 
-  public getFilterItems = createEffect(() =>
+  public getBlogs = createEffect(() =>
     this.actions$.pipe(
       ofType(blogsActions.getBlogs),
       switchMap(() =>

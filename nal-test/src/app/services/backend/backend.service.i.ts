@@ -82,7 +82,7 @@ export interface PostBlogsResponseSuccess {
   };
 }
 
-export interface PostBlogsResponseFailure {
+export interface BlogResponseFailure {
   message: string;
   type: string;
   status: string;
