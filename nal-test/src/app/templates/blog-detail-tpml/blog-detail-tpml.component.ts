@@ -9,10 +9,8 @@ import { BlogDetailData } from './blog-detail-tpml.component.i';
 export class BlogDetailTpmlComponent {
   _blogDetailData: BlogDetailData = {};
 
-  @Input() set blogDetailData(value: BlogDetailData|any) {
+  @Input() set blogDetailData(value: BlogDetailData | any) {
     if (!!value?.data?.id) {
-      console.log(value);
-      
       this._blogDetailData = value.data;
     }
   }
