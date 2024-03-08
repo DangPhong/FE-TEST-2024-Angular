@@ -3,8 +3,10 @@ import {
   getBlogDetail,
   getBlogDetailFailure,
   getBlogDetailSuccess,
+  upsertBlogFailure,
+  upsertBlogSuccess,
 } from './blog-detail.actions';
-import { GetBlogDetailSuccess } from './blog-detail.model';
+import { GetBlogDetailData, RequestBodyUpsertData } from './blog-detail.model';
 
 export const blogsFeatureKey = 'blogs-detail';
 
@@ -13,11 +15,22 @@ export const blogDetailSelector =
 
 // States
 export interface BlogDetailState {
-  blogDetail: GetBlogDetailSuccess;
+  blogDetail: GetBlogDetailData;
+
+  upsertBlogData: RequestBodyUpsertData;
   isLoading: boolean;
 }
 
-export const initialGetBlogDetailData: GetBlogDetailSuccess = {
+export const initialUpsertBlogData: RequestBodyUpsertData = {
+  id: undefined,
+  blog: {
+    title: '',
+    content: '',
+    image: '',
+  },
+};
+
+export const initialGetBlogDetailData: GetBlogDetailData = {
   id: undefined,
   title: '',
   content: '',
@@ -31,6 +44,7 @@ export const initialGetBlogDetailData: GetBlogDetailSuccess = {
 
 export const initialState: BlogDetailState = {
   blogDetail: initialGetBlogDetailData,
+  upsertBlogData: initialUpsertBlogData,
   isLoading: false,
 };
 
@@ -51,9 +65,26 @@ export const blogDetailReducer = createReducer<BlogDetailState>(
     };
   }),
 
-  on(getBlogDetailFailure, (state) => {
+  on(getBlogDetailFailure, upsertBlogFailure, (state) => {
     return {
       ...state,
+      isLoading: false,
+    };
+  }),
+
+  on(upsertBlogSuccess, (state, { payload }) => {
+    return {
+      ...state,
+      upsertBlogData: {
+        ...state.upsertBlogData,
+        blog: {
+          ...state.upsertBlogData.blog,
+          title: payload.title,
+          content: payload.content,
+          image: payload.image.url,
+        },
+        id: payload.id,
+      },
       isLoading: false,
     };
   })

@@ -1,10 +1,15 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { BlogDetailState, blogDetailSelector, blogsFeatureKey } from './blog-detail.reducers';
-import { GetBlogDetailSuccess } from './blog-detail.model'; 
+import { createSelector } from '@ngrx/store';
+import { blogDetailSelector } from './blog-detail.reducers';
+import { GetBlogDetailData, RequestBodyUpsertData } from './blog-detail.model';
 
 export const selectBlogDetail = createSelector(
   blogDetailSelector,
-  (projector): GetBlogDetailSuccess => projector.blogDetail
+  (projector): GetBlogDetailData => projector.blogDetail
+);
+
+export const selectUpsertBlogData = createSelector(
+  blogDetailSelector,
+  (projector): RequestBodyUpsertData => projector.upsertBlogData
 );
 
 export const selectIsLoading = createSelector(
