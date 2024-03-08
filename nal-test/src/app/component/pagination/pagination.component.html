@@ -15,7 +15,7 @@
     <ul class="dropdown-menu">
       <li *ngFor="let pageSize of paginationSize">
         <button
-          class="dropdown-item"
+          class="dropdown-item hover-pointer"
           type="button"
           (click)="pageSizeChange(pageSize)"
         >
@@ -36,14 +36,14 @@
     </li>
 
     <li
-      class="page-item"
+      class="page-item hover-pointer"
       *ngFor="let item of [].constructor(_items?.total); index as i"
       [ngClass]="i === _items.page - 1 ? 'active' : ''"
     >
       <a class="page-link" (click)="pageChange(i + 1)">{{ i + 1 }}</a>
     </li>
 
-    <li class="page-item">
+    <li class="page-item hover-pointer">
       <a
         class="page-link"
         aria-label="Next"
