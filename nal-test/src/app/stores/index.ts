@@ -22,10 +22,5 @@ export const REDUCER_TOKEN = new InjectionToken<ActionReducerMap<AppState>>(
   'reducers'
 );
 
-export const salesReportSelector =
+export const blogSelector =
   createFeatureSelector<BlogsState>('blogStore');
-export const createScheduleSelector =
-  createFeatureSelector<BlogDetailState>('blogDetailStore');
-
-export const upsertBlogSelector =
-  createFeatureSelector<BlogDetailState>('upsertBlogStore');

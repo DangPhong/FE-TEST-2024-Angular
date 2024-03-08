@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import {
   getUpsertBlog,
   getUpsertBlogFailure,
@@ -8,6 +8,10 @@ import {
   upsertBlogSuccess,
 } from './upsert-blog.actions';
 import { GetBlogEditData, RequestBodyUpsertData } from './upsert-blog.model';
+import { BlogDetailState } from '../blog-detail';
+
+export const upsertBlogSelector =
+  createFeatureSelector<BlogDetailState>('upsertBlogStore');
 
 export const upsertBlogFeatureKey = 'upsert-blog';
 

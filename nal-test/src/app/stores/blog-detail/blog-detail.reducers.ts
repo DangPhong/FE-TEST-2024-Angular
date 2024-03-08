@@ -1,4 +1,4 @@
-import { createReducer, on } from '@ngrx/store';
+import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import {
   getBlogDetail,
   getBlogDetailFailure,
@@ -7,6 +7,9 @@ import {
 import { GetBlogDetailSuccess } from './blog-detail.model';
 
 export const blogsFeatureKey = 'blogs-detail';
+
+export const blogDetailSelector =
+  createFeatureSelector<BlogDetailState>('blogDetailStore');
 
 // States
 export interface BlogDetailState {

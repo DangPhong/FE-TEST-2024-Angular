@@ -1,13 +1,13 @@
 import { createSelector } from '@ngrx/store';
 
-import { salesReportSelector } from '..';
+import { blogSelector } from '..';
 import { GetBlogsData } from './blogs.model';
 
 // export const selectBlogsState =
 //   createFeatureSelector<BlogsState>(blogsFeatureKey);
 
 export const selectBlogs = createSelector(
-  salesReportSelector,
+  blogSelector,
   (projector): GetBlogsData => {
 
     return projector.blogs;
@@ -15,6 +15,6 @@ export const selectBlogs = createSelector(
 );
 
 export const selectIsLoading = createSelector(
-  salesReportSelector,
+  blogSelector,
   (projector): boolean => projector.isLoading
 );

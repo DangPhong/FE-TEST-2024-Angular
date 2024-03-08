@@ -50,6 +50,8 @@ export class BlogTpmlComponent {
 
   @Output() emitSortDirection = new EventEmitter<string>();
 
+  @Output() emitNewBlog = new EventEmitter();
+
   pageChange(pagination: IEmitPageChange) {
     this.emitPagesize.emit(pagination);
   }

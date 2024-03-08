@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
 import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
-import { GetBlogsData } from 'src/app/stores/blogs';
+import { GetBlogsData, initialGetBlogsData } from 'src/app/stores/blogs';
 
 import { BlogsService } from '../../services/blogs/blogs.service';
 import { EType } from './blog.page.i';
@@ -47,7 +47,14 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.sortObject = {
+      key: 'id',
+      direction: 'asc',
+    };
+    this.dataItems = initialGetBlogsData;
+    this.paramRequest = {};
+  }
 
   pageChange(pagination: IEmitPageChange) {
     const paramRequest: GetBlogsRqParam = {
@@ -80,5 +87,8 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     };
 
     this.blogServices.fetchBlogData(paramRequest);
+  }
+
+  addNewBlogDetail() {
   }
 }

@@ -4,8 +4,9 @@
   [sortDirectionTpm]="sortDirection"
   [keyDefaultSortKey]="sortObject.key"
   [keyDefaultSortDirection]="sortObject.direction"
-  (emitSortDirection)="sortItem($event,'direction')"
-  (emitKeySort)="sortItem($event,'key')"
+  (emitNewBlog)="addNewBlogDetail()"
+  (emitSortDirection)="sortItem($event, 'direction')"
+  (emitKeySort)="sortItem($event, 'key')"
   (emitPagesize)="pageChange($event)"
   (emitSearch)="searchItem($event)"
 ></app-blog-tpml>
