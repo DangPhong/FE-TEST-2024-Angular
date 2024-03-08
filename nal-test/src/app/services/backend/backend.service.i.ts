@@ -34,15 +34,15 @@ export interface GetBlogsResponse {
   pagination: Pagination;
 }
 
-export interface PostPutBlogBody {
+export interface UpsertBlogBody {
   blog: {
     title: string;
     content: string;
-    image: string;
+    image?: string;
   };
 }
 
-export interface ItemsBlogPostBlogsResponseSuccess {
+export interface UpsertResponse {
   id: number;
   title: string;
   content: string;
@@ -50,23 +50,4 @@ export interface ItemsBlogPostBlogsResponseSuccess {
   image: { url: string };
   created_at: string;
   updated_at: string;
-}
-
-export interface PostBlogsResponseSuccess {
-  data: {
-    items: ItemsBlogPostBlogsResponseSuccess[];
-  };
-}
-
-export interface BlogResponseFailure {
-  message: string;
-  type: string;
-  status: string;
-  path: string;
-  error_code: string;
-  errors: {
-    field: string;
-    code: string;
-    message: string;
-  }[];
 }

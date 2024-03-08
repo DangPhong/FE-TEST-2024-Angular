@@ -5,9 +5,8 @@ import {
   GetBlogsResponse as GetBlogsResponse,
   GetBlogsRqParam,
   ItemsBlogResponse,
-  PostPutBlogBody,
-  PostBlogsResponseSuccess,
-  BlogResponseFailure,
+  UpsertBlogBody,
+  UpsertResponse,
 } from './backend.service.i';
 
 @Injectable({
@@ -276,13 +275,13 @@ export class BackendService {
 
   public upsertBlog(
     id: number,
-    body: PostPutBlogBody
-  ): Observable<PostBlogsResponseSuccess> {
+    body: UpsertBlogBody
+  ): Observable<UpsertResponse> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;
     if (!!id) {
-      return this.httpClient.put<PostBlogsResponseSuccess>(`blogs/${id}`, body);
+      return this.httpClient.put<UpsertResponse>(`blogs/${id}`, body);
     }
-    return this.httpClient.post<PostBlogsResponseSuccess>(endPoint, body);
+    return this.httpClient.post<UpsertResponse>(endPoint, body);
   }
 
   public deleteBlog(id: number): Observable<null> {
