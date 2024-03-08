@@ -1,41 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogsPageComponent } from './pages/blogs-page/blogs-page.component';
-
-// const routes: Routes = [
-//   { path: '', redirectTo: '/blogs', pathMatch: 'full' },
-//   {
-//     path: 'blogs',
-//     loadChildren: () =>
-//       import('./pages/blogs-page/blogs-page.module').then(
-//         (m) => m.BlogsPageModule
-//       ),
-
-//     // children: [
-//     //   {
-//     //     path: 'blog/:id',
-//     //     loadChildren: () =>
-//     //       import('./pages/blog-detail-page/blog-detail-page.module').then(
-//     //         (m) => m.BlogDetailPageModule
-//     //       ),
-//     //   },
-//     //   {
-//     //     path: 'create-blog',
-//     //     loadChildren: () =>
-//     //       import('./pages/upsert-blog-page/upsert-blog-page.module').then(
-//     //         (m) => m.UpsertBlogPageModule
-//     //       ),
-//     //   },
-//     //   {
-//     //     path: 'edit-blog:/id',
-//     //     loadChildren: () =>
-//     //       import('./pages/upsert-blog-page/upsert-blog-page.module').then(
-//     //         (m) => m.UpsertBlogPageModule
-//     //       ),
-//     //   },
-//     // ],
-//   },
-// ];
 
 const routes: Routes = [
   { path: '', redirectTo: '/blogs', pathMatch: 'full' },
@@ -47,10 +11,24 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'blog',
+    path: 'blog/:id',
     loadChildren: () =>
       import('./pages/blog-detail-page/blog-detail-page.module').then(
         (m) => m.BlogDetailPageModule
+      ),
+  },
+  {
+    path: 'create-blog',
+    loadChildren: () =>
+      import('./pages/upsert-blog-page/upsert-blog-page.module').then(
+        (m) => m.UpsertBlogPageModule
+      ),
+  },
+  {
+    path: 'edit-blog/:id',
+    loadChildren: () =>
+      import('./pages/upsert-blog-page/upsert-blog-page.module').then(
+        (m) => m.UpsertBlogPageModule
       ),
   },
 ];
