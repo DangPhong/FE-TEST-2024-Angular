@@ -21,6 +21,8 @@ export class UpsertBlogTpmlComponent implements OnChanges {
   formGroup!: FormGroup;
   _item!: GetBlogEditData;
 
+  @Input() titlePage: string = 'Blog Detail';
+
   @Input() set item(data: GetBlogEditData | any) {
     if (!!data.data?.id) {
       this.formGroup.setValue({
@@ -70,10 +72,6 @@ export class UpsertBlogTpmlComponent implements OnChanges {
           content: this.formGroup.value.title,
           image: this.formGroup.value.image,
         },
-
-        // 'blog[title]': this.formGroup.value.title,
-        // 'blog[content]': this.formGroup.value.content,
-        // 'blog[image]': this.formGroup.value.image,
       },
     };
     this.emitActionSubmit.emit(payload);

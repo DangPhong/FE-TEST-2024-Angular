@@ -13,6 +13,7 @@ export class BlogDetailPageComponent implements OnInit, OnDestroy {
   notifier = new Subject();
   blogDetailData!: BlogDetailData;
   blogId = 0;
+  titlePage='Blog Detail Page'
   constructor(
     private route: ActivatedRoute,
     private blogDetailServices: BlogDetailService
