@@ -150,33 +150,7 @@ body {
   font-size: 12px;
 }
 
-.comment-reply li {
-  margin-bottom: 15px;
-}
 
-.comment-reply li:last-child {
-  margin-bottom: none;
-}
-
-.comment-reply li h5 {
-  font-size: 18px;
-}
-
-.comment-reply li p {
-  margin-bottom: 0px;
-  font-size: 15px;
-  color: #777;
-}
-
-.comment-reply .list-inline li {
-  display: inline-block;
-  margin: 0;
-  padding-right: 20px;
-}
-
-.comment-reply .list-inline li a {
-  font-size: 13px;
-}
 
 @media (max-width: 640px) {
   .blog-page .content .single-comment-box > ul > li {

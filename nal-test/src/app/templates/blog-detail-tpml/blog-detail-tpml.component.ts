@@ -7,5 +7,11 @@ import { BlogDetailData } from './blog-detail-tpml.component.i';
   styleUrls: ['./blog-detail-tpml.component.scss'],
 })
 export class BlogDetailTpmlComponent {
-  @Input() blogDetailData: BlogDetailData = {};
+  _blogDetailData: BlogDetailData = {};
+
+  @Input() set blogDetailData(value: BlogDetailData) {
+    if (!!value.id) {
+      this._blogDetailData = value;
+    }
+  }
 }

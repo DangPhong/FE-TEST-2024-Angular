@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BlogDetailService } from '../../services/blog-detail/blog-detail.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { BlogDetailData } from '../../templates/blog-detail-tpml/blog-detail-tpml.component.i';
 
@@ -12,19 +12,26 @@ import { BlogDetailData } from '../../templates/blog-detail-tpml/blog-detail-tpm
 export class BlogDetailPageComponent implements OnInit, OnDestroy {
   notifier = new Subject();
   blogDetailData!: BlogDetailData;
+  blogId = 0;
   constructor(
-    private router: Router,
+    private route: ActivatedRoute,
     private blogDetailServices: BlogDetailService
-  ) {}
+  ) {
+    this.route.params
+      .pipe(takeUntil(this.notifier))
+      .subscribe((data: Params) => {
+        this.blogId = data?.['id'];
+      });
+  }
   ngOnInit(): void {
-    this.blogDetailServices.fetchBlogDetailData(888);
+    this.blogDetailServices.fetchBlogDetailData(this.blogId);
 
     this.blogDetailServices
       .getBlogDetailData()
       .pipe(takeUntil(this.notifier))
       .subscribe((blogDetailData) => {
-        if (blogDetailData) {
-          console.log('blogDetailData', blogDetailData);
+        if (!!blogDetailData?.id) {
+          this.blogDetailData = blogDetailData;
         }
       });
   }
