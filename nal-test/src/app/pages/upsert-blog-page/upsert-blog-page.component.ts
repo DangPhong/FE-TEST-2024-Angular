@@ -2,7 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
 import { BlogDetailService } from 'src/app/services/blog-detail/blog-detail.service';
-import { GetBlogDetailData, GetBlogEditData, RequestBodyUpsertData } from 'src/app/stores/blog-detail';
+import {
+  GetBlogDetailData,
+  GetBlogEditData,
+  RequestBodyUpsertData,
+} from 'src/app/stores/blog-detail';
 
 @Component({
   selector: 'app-upsert-blog-page',
@@ -31,8 +35,6 @@ export class UpsertBlogPageComponent implements OnInit, OnDestroy {
   }
   upsertBlog(event: { action: string; value: RequestBodyUpsertData }) {
     const { action, value } = event;
-    if (action === 'edit') {
-      this.service.upsertBlog(value);
-    }
+    this.service.upsertBlog(value);
   }
 }

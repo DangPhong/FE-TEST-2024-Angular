@@ -52,7 +52,7 @@ export class UpsertBlogTpmlComponent implements OnChanges {
   askSave() {
     const payload: {
       action: string;
-      value: RequestBodyUpsertData;
+      value: RequestBodyUpsertData|any;
     } = {
       action: !!this.formGroup.value.id ? 'edit' : 'create',
       value: {
@@ -62,6 +62,10 @@ export class UpsertBlogTpmlComponent implements OnChanges {
           content: this.formGroup.value.title,
           image: this.formGroup.value.image,
         },
+        
+        // 'blog[title]': this.formGroup.value.title,
+        // 'blog[content]': this.formGroup.value.content,
+        // 'blog[image]': this.formGroup.value.image,
       },
     };
     this.emitActionSubmit.emit(payload);

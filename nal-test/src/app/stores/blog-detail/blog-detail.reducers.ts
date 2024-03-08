@@ -81,7 +81,7 @@ export const blogDetailReducer = createReducer<BlogDetailState>(
           ...state.upsertBlogData.blog,
           title: payload.title,
           content: payload.content,
-          image: payload.image.url,
+          image: payload.image?.url,
         },
         id: payload.id,
       },

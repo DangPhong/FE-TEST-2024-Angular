@@ -98,8 +98,8 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl(`${'create-blog'}`);
     } else if (action === 'view') {
       this.router.navigateByUrl(`${'blog'}/${id}`);
-    }else{
-      
+    } else {
+      if (!!id) this.blogServices.deleteBlog(id);
     }
   }
 }
