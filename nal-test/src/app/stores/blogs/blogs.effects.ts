@@ -4,6 +4,7 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import * as blogsActions from './blogs.actions';
 import { BackendService } from '../../services/backend/backend.service';
 import { GetBlogsResponse as GetBlogsResponse } from '../../services/backend/backend.service.i';
+import { paramRequest } from './blogs.reducers';
 
 @Injectable()
 export class BlogsEffects {
@@ -51,7 +52,7 @@ export class BlogsEffects {
   public deleteBlogSuccess = createEffect(() => {
     return this.actions$.pipe(
       ofType(blogsActions.deleteBlogSuccess),
-      map(() => blogsActions.getBlogs())
+      map(() => blogsActions.getBlogs(paramRequest))
     );
   });
 }

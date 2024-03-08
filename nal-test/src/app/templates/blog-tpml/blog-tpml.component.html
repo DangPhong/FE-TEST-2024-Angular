@@ -16,5 +16,8 @@
       </div>
     </li>
   </ul>
-  <app-pagination [items]="_itemPagination"></app-pagination>
+  <app-pagination
+    [items]="_itemPagination"
+    (emitPagesize)="pageChange($event)"
+  ></app-pagination>
 </div>

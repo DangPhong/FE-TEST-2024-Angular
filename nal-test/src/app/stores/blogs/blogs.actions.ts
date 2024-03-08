@@ -1,9 +1,13 @@
 import { createAction, props } from '@ngrx/store';
 import { FailedReason, GetBlogsData } from './blogs.model';
+import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
 
 const prefix = '[Blogs]';
 
-export const getBlogs = createAction(`${prefix} Get blog list`);
+export const getBlogs = createAction(
+  `${prefix} Get blog list`,
+  props<GetBlogsRqParam>()
+);
 
 export const getBlogsSuccess = createAction(
   `${getBlogs.type} success`,

@@ -4,6 +4,7 @@ import { selectBlogs, selectIsLoading } from '../../stores/blogs';
 import * as blogActions from '../../stores/blogs/blogs.actions';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/stores';
+import { GetBlogsRqParam } from '../backend/backend.service.i';
 
 @Injectable({
   providedIn: 'root',
@@ -15,8 +16,8 @@ export class BlogsService {
     return this.store.select(selectBlogs);
   }
 
-  fetchBlogData() {
-    this.store.dispatch(blogActions.getBlogs());
+  fetchBlogData(param: GetBlogsRqParam) {
+    this.store.dispatch(blogActions.getBlogs(param));
   }
 
   getIsLoading() {

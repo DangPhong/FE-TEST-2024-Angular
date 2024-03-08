@@ -1,8 +1,8 @@
 // https://mock-api.nals.vn/api/v2
 
 export interface GetBlogsRqParam {
-  page?: string;
-  offset?: string;
+  page?: number;
+  offset?: number;
   search?: string;
   sort_by?: string;
   sort_direction?: string;

@@ -8,6 +8,7 @@ import {
   getBlogsFailure,
   getBlogsSuccess,
 } from './blogs.actions';
+import { GetBlogsRqParam } from '../../services/backend/backend.service.i';
 
 export const blogsFeatureKey = 'blogs';
 
@@ -16,6 +17,7 @@ export interface BlogsState {
   blogs: GetBlogsData;
   isLoading: boolean;
 }
+export const paramRequest: GetBlogsRqParam = {};
 
 export const initialGetBlogsData: GetBlogsData = {
   data: {

@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
 import {
   GetBlogsData,
   ItemsBlogData,
@@ -11,16 +12,6 @@ import {
   styleUrls: ['./blog-tpml.component.scss'],
 })
 export class BlogTpmlComponent {
-  @Input() titlePage: string = 'Blog list';
-
-  _dataItems: ItemsBlogData[] = [];
-
-  @Input() set dataItems(data: GetBlogsData) {
-    if (data.data.items.length) {
-      this._dataItems = data.data.items;
-      this._itemPagination = data.pagination;
-    }
-  }
   _itemPagination: PaginationData = {
     page: 1,
     count: 0,
@@ -29,4 +20,21 @@ export class BlogTpmlComponent {
     prev: 0,
     offset: 0,
   };
+
+  _dataItems: ItemsBlogData[] = [];
+
+  @Input() titlePage: string = 'Blog list';
+
+  @Input() set dataItems(data: GetBlogsData) {
+    if (data?.data?.items?.length) {
+      this._dataItems = data.data.items;
+      this._itemPagination = data.pagination;
+    }
+  }
+
+  @Output() emitPagesize = new EventEmitter<IEmitPageChange>();
+
+  pageChange(pagination: IEmitPageChange) {
+    this.emitPagesize.emit(pagination);
+  }
 }
