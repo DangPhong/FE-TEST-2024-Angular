@@ -60,10 +60,18 @@ export class BackendService {
     body: UpsertBlogBody
   ): Observable<UpsertResponse> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;
+    const rqBody: UpsertBlogBody = {
+      blog: {
+        content: body.blog.content,
+        title: body.blog.title,
+        image: body.blog.image,
+      },
+    };
+
     if (!!id) {
-      return this.httpClient.put<UpsertResponse>(`blogs/${id}`, body);
+      return this.httpClient.put<UpsertResponse>(`blogs/${id}`, rqBody);
     }
-    return this.httpClient.post<UpsertResponse>(endPoint, body);
+    return this.httpClient.post<UpsertResponse>(endPoint, rqBody);
   }
 
   public deleteBlog(id: number): Observable<null> {
