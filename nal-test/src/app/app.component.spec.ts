@@ -16,10 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'nal-test'`, () => {
+  it(`should have as title 'FE-TEST-2024-Angular'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('nal-test');
+    expect(app.title).toEqual('FE-TEST-2024-Angular');
   });
 
   it('should render title', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'nal-test app is running!'
+      'FE-TEST-2024-Angular app is running!'
     );
   });
 });
