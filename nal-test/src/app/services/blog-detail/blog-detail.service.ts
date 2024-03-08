@@ -3,10 +3,12 @@ import { Store } from '@ngrx/store';
 import { selectIsLoading } from '../../stores/blogs';
 import * as blogDetailActions from '../../stores/blog-detail/blog-detail.actions';
 import {
+  GetBlogDetailData,
   RequestBodyUpsertData,
   selectBlogDetail,
   selectUpsertBlogData,
 } from '../../stores/blog-detail';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +16,7 @@ import {
 export class BlogDetailService {
   constructor(private store: Store) {}
 
-  getBlogDetailData() {
+  getBlogDetailData():Observable<GetBlogDetailData> {
     return this.store.select(selectBlogDetail);
   }
 
@@ -23,7 +25,7 @@ export class BlogDetailService {
   }
 
   getUpsertBlogDataBody() {
-    return this.store.select(selectUpsertBlogData);
+    return this.store.select(selectBlogDetail);
   }
 
   upsertBlog(data: RequestBodyUpsertData) {

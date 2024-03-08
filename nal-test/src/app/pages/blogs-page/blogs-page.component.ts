@@ -89,6 +89,17 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     this.blogServices.fetchBlogData(paramRequest);
   }
 
-  addNewBlogDetail() {
+  addNewBlogDetail(value: { action: string; id?: number }) {
+    console.log(value);
+    const { action, id } = value;
+    if (action === 'edit') {
+      this.router.navigateByUrl(`${'edit-blog'}/${id}`);
+    } else if (action === 'create') {
+      this.router.navigateByUrl(`${'create-blog'}`);
+    } else if (action === 'view') {
+      this.router.navigateByUrl(`${'blog'}/${id}`);
+    }else{
+      
+    }
   }
 }

@@ -50,7 +50,7 @@ export class BlogTpmlComponent {
 
   @Output() emitSortDirection = new EventEmitter<string>();
 
-  @Output() emitNewBlog = new EventEmitter();
+  @Output() emitNewBlog = new EventEmitter<{ action: string; id?: number }>();
 
   pageChange(pagination: IEmitPageChange) {
     this.emitPagesize.emit(pagination);
@@ -68,5 +68,12 @@ export class BlogTpmlComponent {
   selectSortDirection(value: string) {
     this.emitSortDirection.emit(value);
     this.keyDefaultSortDirection = value;
+  }
+
+  clickDetail(value: string, i?: number) {
+    this.emitNewBlog.emit({
+      action: value,
+      ...(i != null && { id: i }),
+    });
   }
 }
