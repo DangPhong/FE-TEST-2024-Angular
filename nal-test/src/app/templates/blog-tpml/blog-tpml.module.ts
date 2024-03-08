@@ -9,11 +9,10 @@ import { ButtonListModule } from 'src/app/component/button-list/button-list.modu
 @NgModule({
   declarations: [BlogTpmlComponent],
   imports: [
-    CommonModule,
     PaginationModule,
     FormsModule,
-    BrowserModule,
     ButtonListModule,
+    CommonModule,
   ],
   exports: [BlogTpmlComponent],
 })

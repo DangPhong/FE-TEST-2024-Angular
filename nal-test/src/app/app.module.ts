@@ -11,15 +11,16 @@ import { AppComponent } from './app.component';
 import { BlogDetailEffects } from './stores/blog-detail';
 import { BlogsEffects } from './stores/blogs';
 import { REDUCER_TOKEN, getReducers } from './stores';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    CommonModule,
     HttpClientModule,
     AppRoutingModule,
     // ngrx
-
     StoreRouterConnectingModule.forRoot({
       routerState: RouterState.Minimal,
     }),
