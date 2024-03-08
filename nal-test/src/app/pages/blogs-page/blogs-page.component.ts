@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { BlogsService } from '../../services/blogs/blogs.service';
-import { Subject, take, takeUntil } from 'rxjs';
-import { GetBlogsData, ItemsBlogData } from 'src/app/stores/blogs';
+import { Subject, takeUntil } from 'rxjs';
 import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
 import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
+import { GetBlogsData } from 'src/app/stores/blogs';
+
+import { BlogsService } from '../../services/blogs/blogs.service';
 
 @Component({
   selector: 'app-blogs-page',
@@ -28,7 +29,6 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.notifier))
       .subscribe((blogData) => {
         if (blogData.data.items.length) {
-          console.log(blogData);
           this.dataItems = blogData;
         }
       });

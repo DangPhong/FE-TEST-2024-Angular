@@ -13,7 +13,7 @@ export class PaginationComponent {
 
   @Input() set items(data: PaginationData) {
     if (data.total > 0) {
-      this._items = data;
+      this._items = {...data};
     }
   }
 
@@ -27,7 +27,6 @@ export class PaginationComponent {
       pageSize: this._items.offset,
     };
     this.emitPagesize.emit(pagination);
-    console.log(pagination);
   }
 
   pageSizeChange(pageSize: number) {
@@ -36,6 +35,5 @@ export class PaginationComponent {
       pageSize,
     };
     this.emitPagesize.emit(pagination);
-    console.log(pagination);
   }
 }

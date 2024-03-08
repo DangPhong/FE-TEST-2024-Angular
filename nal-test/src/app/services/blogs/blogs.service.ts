@@ -17,6 +17,8 @@ export class BlogsService {
   }
 
   fetchBlogData(param: GetBlogsRqParam) {
+    console.log("dispatch",param);
+    
     this.store.dispatch(blogActions.getBlogs(param));
   }
 

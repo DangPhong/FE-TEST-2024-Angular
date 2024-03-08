@@ -26,6 +26,25 @@ export class BackendService {
         ...params,
       },
     });
+
+    let queryParams = new HttpParams();
+
+    if (params?.offset != null) {
+      queryParams = queryParams.append('offset', params.offset);
+    }
+    if (params?.page != null) {
+      queryParams = queryParams.append('page', params.page);
+    }
+    if (params?.search != null) {
+      queryParams = queryParams.append('search', params.search);
+    }
+    if (params?.sort_by != null) {
+      queryParams = queryParams.append('sort_by', params.sort_by);
+    }
+    if (params?.sort_direction != null) {
+      queryParams = queryParams.append('sort_direction', params.sort_direction);
+    }
+
     // return of({
     //   data: {
     //     items: [
@@ -264,7 +283,7 @@ export class BackendService {
     //   },
     // });
     return this.httpClient.get<GetBlogsResponse>(endPoint, {
-      params: paramsObj,
+      params: queryParams,
     });
   }
 
@@ -274,7 +293,7 @@ export class BackendService {
   }
 
   public upsertBlog(
-    id: number,
+    id: number | undefined,
     body: UpsertBlogBody
   ): Observable<UpsertResponse> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;

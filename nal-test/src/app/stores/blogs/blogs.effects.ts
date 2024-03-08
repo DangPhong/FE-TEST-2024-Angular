@@ -16,8 +16,8 @@ export class BlogsEffects {
   public getBlogs = createEffect(() =>
     this.actions$.pipe(
       ofType(blogsActions.getBlogs),
-      switchMap(() =>
-        this.backendService.getBlogs().pipe(
+      switchMap((action) =>
+        this.backendService.getBlogs(action).pipe(
           map((res: GetBlogsResponse) =>
             blogsActions.getBlogsSuccess({ blogs: res })
           ),
