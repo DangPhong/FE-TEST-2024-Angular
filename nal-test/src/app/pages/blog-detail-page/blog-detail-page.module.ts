@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BlogDetailPageComponent } from './blog-detail-page.component';
 import { EffectsModule } from '@ngrx/effects';
 import { RouterModule } from '@angular/router';
-import { BlogDetailTpmlModule } from '../../templates/blog-tpml/blog-detail-tpml/blog-detail-tpml.module';
+import { BlogDetailTpmlModule } from '../../templates/blog-detail-tpml/blog-detail-tpml.module';
 
 @NgModule({
   declarations: [BlogDetailPageComponent],
