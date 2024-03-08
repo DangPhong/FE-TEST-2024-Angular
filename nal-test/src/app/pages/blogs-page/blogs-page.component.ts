@@ -54,6 +54,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     };
     this.dataItems = initialGetBlogsData;
     this.paramRequest = {};
+    this.blogServices.clearBlogStore();
   }
 
   pageChange(pagination: IEmitPageChange) {
@@ -90,7 +91,6 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
   }
 
   addNewBlogDetail(value: { action: string; id?: number }) {
-    console.log(value);
     const { action, id } = value;
     if (action === 'edit') {
       this.router.navigateByUrl(`${'edit-blog'}/${id}`);

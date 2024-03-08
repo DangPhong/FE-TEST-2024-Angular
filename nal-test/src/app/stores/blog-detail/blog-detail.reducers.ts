@@ -1,5 +1,6 @@
 import { createFeatureSelector, createReducer, on } from '@ngrx/store';
 import {
+  cancelEntry,
   getBlogDetail,
   getBlogDetailFailure,
   getBlogDetailSuccess,
@@ -85,6 +86,13 @@ export const blogDetailReducer = createReducer<BlogDetailState>(
         },
         id: payload.id,
       },
+      isLoading: false,
+    };
+  }),
+  on(cancelEntry, () => {
+    return {
+      blogDetail: initialGetBlogDetailData,
+      upsertBlogData: initialUpsertBlogData,
       isLoading: false,
     };
   })

@@ -74,7 +74,7 @@
         />
         <div class="media-body" style="width: 200px; height: 200px">
           <h5 class="mt-0 mb-1">{{ item.title }}</h5>
-          <p (click)="clickDetail('view')" class="text-truncate hover-pointer">
+          <p (click)="clickDetail('view',item.id)" class="text-truncate hover-pointer">
             {{ item.content }}
           </p>
         </div>

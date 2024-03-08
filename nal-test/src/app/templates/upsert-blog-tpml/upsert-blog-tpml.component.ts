@@ -30,6 +30,14 @@ export class UpsertBlogTpmlComponent implements OnChanges {
         comments_count: data.data.comments_count,
         image: data.data?.image?.url,
       });
+    } else {
+      this.formGroup = this.fb.group({
+        id: ['', []],
+        title: ['', Validators.required],
+        content: ['', [Validators.required]],
+        comments_count: [''],
+        image: ['', Validators.required],
+      });
     }
   }
 
@@ -52,7 +60,7 @@ export class UpsertBlogTpmlComponent implements OnChanges {
   askSave() {
     const payload: {
       action: string;
-      value: RequestBodyUpsertData|any;
+      value: RequestBodyUpsertData | any;
     } = {
       action: !!this.formGroup.value.id ? 'edit' : 'create',
       value: {
@@ -62,7 +70,7 @@ export class UpsertBlogTpmlComponent implements OnChanges {
           content: this.formGroup.value.title,
           image: this.formGroup.value.image,
         },
-        
+
         // 'blog[title]': this.formGroup.value.title,
         // 'blog[content]': this.formGroup.value.content,
         // 'blog[image]': this.formGroup.value.image,

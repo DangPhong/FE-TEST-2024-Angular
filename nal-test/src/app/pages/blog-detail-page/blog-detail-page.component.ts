@@ -11,7 +11,7 @@ import { BlogDetailData } from '../../templates/blog-detail-tpml/blog-detail-tpm
 })
 export class BlogDetailPageComponent implements OnInit, OnDestroy {
   notifier = new Subject();
-  blogDetailData!:BlogDetailData;
+  blogDetailData!: BlogDetailData;
   constructor(
     private router: Router,
     private blogDetailServices: BlogDetailService
@@ -28,5 +28,7 @@ export class BlogDetailPageComponent implements OnInit, OnDestroy {
         }
       });
   }
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.blogDetailServices.clearStore();
+  }
 }

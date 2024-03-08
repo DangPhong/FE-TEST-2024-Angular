@@ -1,6 +1,7 @@
 import { GetBlogsData } from './blogs.model';
 import { createReducer, on } from '@ngrx/store';
 import {
+  cancelEntry,
   deleteBlog,
   deleteBlogFailure,
   deleteBlogSuccess,
@@ -65,6 +66,12 @@ export const blogsReducer = createReducer<BlogsState>(
   on(deleteBlogSuccess, deleteBlogFailure, (state) => {
     return {
       ...state,
+      isLoading: false,
+    };
+  }),
+  on(cancelEntry, () => {
+    return {
+      blogs: initialGetBlogsData,
       isLoading: false,
     };
   })

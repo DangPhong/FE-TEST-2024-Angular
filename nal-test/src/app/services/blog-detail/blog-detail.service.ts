@@ -16,16 +16,12 @@ import { Observable } from 'rxjs';
 export class BlogDetailService {
   constructor(private store: Store) {}
 
-  getBlogDetailData():Observable<GetBlogDetailData> {
+  getBlogDetailData(): Observable<GetBlogDetailData> {
     return this.store.select(selectBlogDetail);
   }
 
   fetchBlogDetailData(id: number) {
     this.store.dispatch(blogDetailActions.getBlogDetail({ id }));
-  }
-
-  getUpsertBlogDataBody() {
-    return this.store.select(selectBlogDetail);
   }
 
   upsertBlog(data: RequestBodyUpsertData) {
