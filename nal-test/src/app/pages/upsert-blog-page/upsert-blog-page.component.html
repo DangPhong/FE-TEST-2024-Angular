@@ -1,1 +1,3 @@
+<app-loading *ngIf="isLoading">{{ isLoading }}</app-loading>
+
 <app-upsert-blog-tpml [item]="item | async" (emitActionSubmit)="upsertBlog($event)"></app-upsert-blog-tpml>

@@ -1,12 +1,21 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
 import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
-import { GetBlogsData, initialGetBlogsData } from 'src/app/stores/blogs';
+import {
+  GetBlogsData,
+  deleteBlogFailure,
+  deleteBlogSuccess,
+  getBlogsFailure,
+  getBlogsSuccess,
+  initialGetBlogsData,
+} from 'src/app/stores/blogs';
 
 import { BlogsService } from '../../services/blogs/blogs.service';
 import { EType } from './blog.page.i';
+import { ActionsSubject } from '@ngrx/store';
+import { ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-blogs-page',
@@ -32,7 +41,12 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     direction: 'asc',
   };
   isLoading = true;
-  constructor(private router: Router, private blogServices: BlogsService) {}
+  constructor(
+    private router: Router,
+    private blogServices: BlogsService,
+
+    private actionListener$: ActionsSubject
+  ) {}
 
   ngOnInit(): void {
     this.blogServices.fetchBlogData(this.paramRequest);
@@ -43,8 +57,40 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       .subscribe((blogData) => {
         if (blogData.data.items.length) {
           this.dataItems = blogData;
-          this.isLoading = false;
+          // this.isLoading = false;
         }
+      });
+
+    this.actionListener$
+      .pipe(ofType(getBlogsFailure), take(1))
+      .subscribe(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 0);
+      });
+
+    this.actionListener$
+      .pipe(ofType(getBlogsSuccess), take(1))
+      .subscribe(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 0);
+      });
+
+    this.actionListener$
+      .pipe(ofType(deleteBlogSuccess), take(1))
+      .subscribe(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 0);
+      });
+
+    this.actionListener$
+      .pipe(ofType(deleteBlogFailure), take(1))
+      .subscribe(() => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 0);
       });
   }
 
