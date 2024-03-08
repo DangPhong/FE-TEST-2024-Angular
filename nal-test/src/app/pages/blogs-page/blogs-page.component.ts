@@ -6,6 +6,7 @@ import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
 import { GetBlogsData } from 'src/app/stores/blogs';
 
 import { BlogsService } from '../../services/blogs/blogs.service';
+import { EType } from './blog.page.i';
 
 @Component({
   selector: 'app-blogs-page',
@@ -18,6 +19,18 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
   public dataItems!: GetBlogsData;
 
   paramRequest: GetBlogsRqParam = {};
+
+  listKeySort = ['id', 'title', 'content', 'create_at', 'updated_at'];
+
+  sortDirection = ['asc', 'desc'];
+
+  sortObject: {
+    key: string;
+    direction: string;
+  } = {
+    key: 'id',
+    direction: 'asc',
+  };
 
   constructor(private router: Router, private blogServices: BlogsService) {}
 
@@ -42,6 +55,30 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       page: pagination.page,
       offset: pagination.pageSize,
     };
+    this.blogServices.fetchBlogData(paramRequest);
+  }
+
+  searchItem(value: string) {
+    const paramRequest: GetBlogsRqParam = {
+      ...this.paramRequest,
+      search: value,
+    };
+
+    this.blogServices.fetchBlogData(paramRequest);
+  }
+
+  sortItem(value: string, type: EType | any) {
+    if (type === EType.KEY) {
+      this.sortObject.key = value;
+    } else {
+      this.sortObject.direction = value;
+    }
+    const paramRequest: GetBlogsRqParam = {
+      ...this.paramRequest,
+      sort_by: this.sortObject.key,
+      sort_direction: this.sortObject.direction,
+    };
+
     this.blogServices.fetchBlogData(paramRequest);
   }
 }

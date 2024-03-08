@@ -23,7 +23,17 @@ export class BlogTpmlComponent {
 
   _dataItems: ItemsBlogData[] = [];
 
+  inputSearch = '';
+
+  @Input() keyDefaultSortKey: string = 'id';
+
+  @Input() keyDefaultSortDirection: string = 'asc';
+
   @Input() titlePage: string = 'Blog list';
+
+  @Input() listKeySortTpm: string[] = [];
+
+  @Input() sortDirectionTpm: string[] = [];
 
   @Input() set dataItems(data: GetBlogsData) {
     if (data?.data?.items?.length) {
@@ -34,7 +44,27 @@ export class BlogTpmlComponent {
 
   @Output() emitPagesize = new EventEmitter<IEmitPageChange>();
 
+  @Output() emitSearch = new EventEmitter<string>();
+
+  @Output() emitKeySort = new EventEmitter<string>();
+
+  @Output() emitSortDirection = new EventEmitter<string>();
+
   pageChange(pagination: IEmitPageChange) {
     this.emitPagesize.emit(pagination);
+  }
+
+  searchValue() {
+    this.emitSearch.emit(this.inputSearch);
+  }
+
+  selectKeySort(value: string) {
+    this.emitKeySort.emit(value);
+    this.keyDefaultSortKey = value;
+  }
+
+  selectSortDirection(value: string) {
+    this.emitSortDirection.emit(value);
+    this.keyDefaultSortDirection = value;
   }
 }

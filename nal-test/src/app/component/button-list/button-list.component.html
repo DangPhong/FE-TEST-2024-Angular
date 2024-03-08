@@ -1,0 +1,21 @@
+<div class="dropdown">
+  <button
+    class="btn btn-primary dropdown-toggle"
+    type="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    {{ keyDefault }}
+  </button>
+  <ul class="dropdown-menu">
+    <li *ngFor="let button of buttons">
+      <button
+        class="dropdown-item"
+        type="button"
+        (click)="selectButton(button)"
+      >
+        {{ button }}
+      </button>
+    </li>
+  </ul>
+</div>

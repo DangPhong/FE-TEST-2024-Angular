@@ -14,18 +14,23 @@
     </button>
     <ul class="dropdown-menu">
       <li *ngFor="let pageSize of paginationSize">
-        <button class="dropdown-item" type="button" (click)="pageSizeChange(pageSize)">{{ pageSize }}</button>
+        <button
+          class="dropdown-item"
+          type="button"
+          (click)="pageSizeChange(pageSize)"
+        >
+          {{ pageSize }}
+        </button>
       </li>
     </ul>
   </div>
-  <!-- <ul class="pagination site-pagination">
-    <li *ngIf="_items?.offset != null" class="page-item">
-      <a class="page-link">{{ _items.offset }}/ page</a>
-    </li>
-  </ul> -->
   <ul class="pagination">
     <li class="page-item">
-      <a class="page-link" aria-label="Previous">
+      <a
+        class="page-link"
+        aria-label="Previous"
+        (click)="pageChange(_items.page - 1)"
+      >
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -39,7 +44,11 @@
     </li>
 
     <li class="page-item">
-      <a class="page-link" aria-label="Next">
+      <a
+        class="page-link"
+        aria-label="Next"
+        (click)="pageChange(_items.page + 1)"
+      >
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

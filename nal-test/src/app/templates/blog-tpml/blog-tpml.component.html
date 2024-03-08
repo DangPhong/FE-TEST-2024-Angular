@@ -1,23 +1,64 @@
 <div class="header">
   <h2>{{ titlePage }}</h2>
 </div>
+
 <div>
-  <ul *ngIf="_dataItems.length > 0" class="list-unstyled row">
-    <li class="media m-2 col-sm-6" *ngFor="let item of _dataItems">
-      <img
-        style="width: 200px; height: 200px"
-        [src]="item.image?.url"
-        class="mr-3 img-thumbnail"
-        alt="..."
-      />
-      <div class="media-body" style="width: 200px; height: 200px">
-        <h5 class="mt-0 mb-1">{{ item.title }}</h5>
-        <p class="text-truncate">{{ item.content }}</p>
+  <div class="input-group mb-3">
+    <div class="d-flex mr-5">
+      <div class="input-group-prepend mr-2 d-flex">
+        <input
+          type="text"
+          class="form-control"
+          placeholder=""
+          aria-label="Example text with button addon"
+          aria-describedby="button-addon1"
+          [(ngModel)]="inputSearch"
+        />
       </div>
-    </li>
-  </ul>
-  <app-pagination
-    [items]="_itemPagination"
-    (emitPagesize)="pageChange($event)"
-  ></app-pagination>
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        id="button-addon1"
+        (click)="searchValue()"
+      >
+        Search
+      </button>
+    </div>
+    <div class="d-flex">
+      <div class="d-flex mr-5">
+        <p class="mr-3">Sort By key</p>
+        <app-button-list
+          [buttons]="listKeySortTpm"
+          [keyDefault]="keyDefaultSortKey"
+          (emitSelected)="selectKeySort($event)"
+        ></app-button-list>
+      </div>
+      <div class="d-flex">
+        <p class="mr-3">Sort Direction</p>
+        <app-button-list
+          [buttons]="sortDirectionTpm"
+          [keyDefault]="keyDefaultSortDirection"
+          (emitSelected)="selectSortDirection($event)"
+        ></app-button-list>
+      </div>
+    </div>
+    <ul *ngIf="_dataItems.length > 0" class="list-unstyled row">
+      <li class="media m-2 col-sm-6" *ngFor="let item of _dataItems">
+        <img
+          style="width: 200px; height: 200px"
+          [src]="item.image?.url"
+          class="mr-3 img-thumbnail"
+          alt="..."
+        />
+        <div class="media-body" style="width: 200px; height: 200px">
+          <h5 class="mt-0 mb-1">{{ item.title }}</h5>
+          <p class="text-truncate">{{ item.content }}</p>
+        </div>
+      </li>
+    </ul>
+    <app-pagination
+      [items]="_itemPagination"
+      (emitPagesize)="pageChange($event)"
+    ></app-pagination>
+  </div>
 </div>

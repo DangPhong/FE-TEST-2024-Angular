@@ -1,1 +1,11 @@
-<app-blog-tpml [dataItems]="dataItems" (emitPagesize)="pageChange($event)"></app-blog-tpml>
+<app-blog-tpml
+  [dataItems]="dataItems"
+  [listKeySortTpm]="listKeySort"
+  [sortDirectionTpm]="sortDirection"
+  [keyDefaultSortKey]="sortObject.key"
+  [keyDefaultSortDirection]="sortObject.direction"
+  (emitSortDirection)="sortItem($event,'direction')"
+  (emitKeySort)="sortItem($event,'key')"
+  (emitPagesize)="pageChange($event)"
+  (emitSearch)="searchItem($event)"
+></app-blog-tpml>
