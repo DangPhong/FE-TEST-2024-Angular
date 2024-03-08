@@ -28,7 +28,6 @@ export class BackendService {
     // });
 
     let queryParams = new HttpParams();
-console.log(params);
 
     if (params?.offset != null) {
       queryParams = queryParams.append('offset', params.offset);

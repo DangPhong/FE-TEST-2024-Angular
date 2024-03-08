@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, map, of } from 'rxjs';
 import { BlogDetailService } from 'src/app/services/blog-detail/blog-detail.service';
-import { GetBlogDetailData, GetBlogEditData } from 'src/app/stores/blog-detail';
+import { GetBlogDetailData, GetBlogEditData, RequestBodyUpsertData } from 'src/app/stores/blog-detail';
 
 @Component({
   selector: 'app-upsert-blog-page',
@@ -22,9 +22,17 @@ export class UpsertBlogPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params: any) => {
-      this.service.fetchBlogDetailData(params?.params?.id);
+      if (!!params?.params?.id) {
+        this.service.fetchBlogDetailData(params?.params?.id);
+      }
     });
 
     this.item = this.service.getBlogDetailData();
+  }
+  upsertBlog(event: { action: string; value: RequestBodyUpsertData }) {
+    const { action, value } = event;
+    if (action === 'edit') {
+      this.service.upsertBlog(value);
+    }
   }
 }

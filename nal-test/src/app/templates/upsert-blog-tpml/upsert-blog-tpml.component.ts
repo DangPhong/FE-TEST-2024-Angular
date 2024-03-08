@@ -1,6 +1,16 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { GetBlogEditData } from 'src/app/stores/blog-detail';
+import {
+  GetBlogEditData,
+  RequestBodyUpsertData,
+} from 'src/app/stores/blog-detail';
 
 @Component({
   selector: 'app-upsert-blog-tpml',
@@ -23,19 +33,37 @@ export class UpsertBlogTpmlComponent implements OnChanges {
     }
   }
 
+  @Output() emitActionSubmit = new EventEmitter<{
+    action: string;
+    value: RequestBodyUpsertData;
+  }>();
+
   constructor(private fb: FormBuilder) {
     this.formGroup = this.fb.group({
-      id: ['', [, Validators.required]],
+      id: ['', []],
       title: ['', Validators.required],
       content: ['', [Validators.required]],
-      comments_count: ['', Validators.required],
+      comments_count: [''],
       image: ['', Validators.required],
     });
   }
   ngOnChanges(changes: SimpleChanges): void {}
 
   askSave() {
-    console.log('save plz');
-    console.log(this.formGroup.value);
+    const payload: {
+      action: string;
+      value: RequestBodyUpsertData;
+    } = {
+      action: !!this.formGroup.value.id ? 'edit' : 'create',
+      value: {
+        id: this.formGroup.value.id || null,
+        blog: {
+          title: this.formGroup.value.title,
+          content: this.formGroup.value.title,
+          image: this.formGroup.value.image,
+        },
+      },
+    };
+    this.emitActionSubmit.emit(payload);
   }
 }
