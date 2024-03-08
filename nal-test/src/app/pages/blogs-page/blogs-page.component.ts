@@ -31,7 +31,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     key: 'id',
     direction: 'asc',
   };
-
+  isLoading = true;
   constructor(private router: Router, private blogServices: BlogsService) {}
 
   ngOnInit(): void {
@@ -43,6 +43,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       .subscribe((blogData) => {
         if (blogData.data.items.length) {
           this.dataItems = blogData;
+          this.isLoading = false;
         }
       });
   }
@@ -63,6 +64,8 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       page: pagination.page,
       offset: pagination.pageSize,
     };
+
+    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
@@ -72,6 +75,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       search: value,
     };
 
+    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
@@ -87,6 +91,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       sort_direction: this.sortObject.direction,
     };
 
+    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
@@ -99,6 +104,7 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     } else if (action === 'view') {
       this.router.navigateByUrl(`${'blog'}/${id}`);
     } else {
+      this.isLoading = true;
       if (!!id) this.blogServices.deleteBlog(id);
     }
   }

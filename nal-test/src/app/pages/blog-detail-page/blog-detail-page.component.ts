@@ -29,8 +29,9 @@ export class BlogDetailPageComponent implements OnInit, OnDestroy {
     this.blogDetailServices
       .getBlogDetailData()
       .pipe(takeUntil(this.notifier))
-      .subscribe((blogDetailData) => {
-        if (!!blogDetailData?.id) {
+      .subscribe((blogDetailData:any) => {
+        if (!!blogDetailData?.data?.id) {
+          
           this.blogDetailData = blogDetailData;
         }
       });
