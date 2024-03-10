@@ -1,5 +1,3 @@
-// https://mock-api.nals.vn/api/v2
-
 export interface GetBlogsRqParam {
   page?: number;
   offset?: number;

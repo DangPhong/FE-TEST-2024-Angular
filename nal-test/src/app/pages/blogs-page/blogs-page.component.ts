@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
-import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
-import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
 import {
   GetBlogsData,
   deleteBlogFailure,
@@ -16,6 +14,8 @@ import { BlogsService } from '../../services/blogs/blogs.service';
 import { EType } from './blog.page.i';
 import { ActionsSubject } from '@ngrx/store';
 import { ofType } from '@ngrx/effects';
+import { GetBlogsRqParam } from '../../services/backend/backend.service.i';
+import { IEmitPageChange } from '../../component/pagination/pagination.i';
 
 @Component({
   selector: 'app-blogs-page',
@@ -57,7 +57,6 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       .subscribe((blogData) => {
         if (blogData.data.items.length) {
           this.dataItems = blogData;
-          // this.isLoading = false;
         }
       });
 

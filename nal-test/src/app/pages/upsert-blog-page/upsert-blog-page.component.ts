@@ -3,12 +3,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ofType } from '@ngrx/effects';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { Observable, of, Subject, take } from 'rxjs';
-import { BlogDetailService } from 'src/app/services/blog-detail/blog-detail.service';
+
 import {
   RequestBodyUpsertData,
   upsertBlogFailure,
   upsertBlogSuccess,
 } from 'src/app/stores/blog-detail';
+import { BlogDetailService } from '../../services/blog-detail/blog-detail.service';
 
 @Component({
   selector: 'app-upsert-blog-page',

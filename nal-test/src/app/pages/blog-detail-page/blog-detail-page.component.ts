@@ -13,7 +13,7 @@ export class BlogDetailPageComponent implements OnInit, OnDestroy {
   notifier = new Subject();
   blogDetailData!: BlogDetailData;
   blogId = 0;
-  titlePage='Blog Detail Page'
+  titlePage = 'Blog Detail Page';
   constructor(
     private route: ActivatedRoute,
     private blogDetailServices: BlogDetailService
@@ -32,7 +32,6 @@ export class BlogDetailPageComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.notifier))
       .subscribe((blogDetailData:any) => {
         if (!!blogDetailData?.data?.id) {
-          
           this.blogDetailData = blogDetailData;
         }
       });
