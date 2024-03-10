@@ -17,9 +17,10 @@ import {
   templateUrl: './upsert-blog-tpml.component.html',
   styleUrls: ['./upsert-blog-tpml.component.scss'],
 })
-export class UpsertBlogTpmlComponent implements OnChanges {
+export class UpsertBlogTpmlComponent {
   formGroup!: FormGroup;
   _item!: GetBlogEditData;
+  file: File | null = null;
 
   @Input() titlePage: string = 'Blog Detail';
 
@@ -38,7 +39,7 @@ export class UpsertBlogTpmlComponent implements OnChanges {
         title: ['', Validators.required],
         content: ['', [Validators.required]],
         comments_count: [''],
-        image: ['', Validators.required],
+        image: [''],
       });
     }
   }
@@ -57,7 +58,6 @@ export class UpsertBlogTpmlComponent implements OnChanges {
       image: ['', Validators.required],
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {}
 
   askSave() {
     const payload: {
@@ -69,11 +69,17 @@ export class UpsertBlogTpmlComponent implements OnChanges {
         id: this.formGroup.value.id || null,
         blog: {
           title: this.formGroup.value.title,
-          content: this.formGroup.value.title,
-          image: this.formGroup.value.image,
+          content: this.formGroup.value.content,
+          image: this.file,
         },
       },
     };
+
     this.emitActionSubmit.emit(payload);
+  }
+
+  uploadFile(event: any) {
+    let file: File = event.target.files[0];
+    this.file = file;
   }
 }

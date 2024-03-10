@@ -30,14 +30,17 @@
     ></textarea>
   </div>
   <div class="form-group">
-    <label for="exampleInputURLImage">URl Image</label>
-    <input
-      type="text"
-      class="form-control"
-      id="exampleInputURLImage"
-      formControlName="image"
-    />
+    <label for="exampleInputURLImage">Image</label>
+    <div>
+      <input
+        type="file"
+        id="exampleInputURLImage"
+        (change)="uploadFile($event)"
+        formControlName="image"
+      />
+    </div>
   </div>
+
   <button type="submit" class="btn btn-primary" [disabled]="!formGroup.valid">
     Submit
   </button>

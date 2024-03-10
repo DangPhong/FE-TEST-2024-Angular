@@ -21,11 +21,6 @@ export class BackendService {
 
   public getBlogs(params?: GetBlogsRqParam): Observable<any> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;
-    // const paramsObj = new HttpParams({
-    //   fromObject: {
-    //     ...params,
-    //   },
-    // });
 
     let queryParams = new HttpParams();
 
@@ -60,13 +55,13 @@ export class BackendService {
     body: UpsertBlogBody
   ): Observable<UpsertResponse> {
     const endPoint = `${this.endPointApi}/${'blogs'}`;
-    const rqBody: UpsertBlogBody = {
-      blog: {
-        content: body.blog.content,
-        title: body.blog.title,
-        image: body.blog.image,
-      },
-    };
+
+    const rqBody: FormData = new FormData();
+    rqBody.append('blog[title]', body.blog.title);
+    rqBody.append('blog[content]', body.blog.content);
+    if (!!body.blog.image) {
+      rqBody.append('blog[image]', body.blog.image);
+    }
 
     if (!!id) {
       return this.httpClient.put<UpsertResponse>(`blogs/${id}`, rqBody);
