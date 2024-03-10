@@ -1,21 +1,20 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subject, take, takeUntil } from 'rxjs';
-import {
-  GetBlogsData,
-  deleteBlogFailure,
-  deleteBlogSuccess,
-  getBlogsFailure,
-  getBlogsSuccess,
-  initialGetBlogsData,
-} from 'src/app/stores/blogs';
-
 import { BlogsService } from '../../services/blogs/blogs.service';
 import { EType } from './blog.page.i';
 import { ActionsSubject } from '@ngrx/store';
 import { ofType } from '@ngrx/effects';
 import { GetBlogsRqParam } from '../../services/backend/backend.service.i';
 import { IEmitPageChange } from '../../component/pagination/pagination.i';
+import {
+  GetBlogsData,
+  getBlogsFailure,
+  getBlogsSuccess,
+  deleteBlogSuccess,
+  deleteBlogFailure,
+  initialGetBlogsData,
+} from '../../stores/blogs';
 
 @Component({
   selector: 'app-blogs-page',

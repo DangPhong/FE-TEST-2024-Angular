@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { FailedReason, GetBlogsData } from './blogs.model';
-import { GetBlogsRqParam } from 'src/app/services/backend/backend.service.i';
+import { GetBlogsRqParam } from '../../services/backend/backend.service.i';
 
 const prefix = '[Blogs]';
 

@@ -1,16 +1,9 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   GetBlogEditData,
   RequestBodyUpsertData,
-} from 'src/app/stores/blog-detail';
+} from '../../stores/blog-detail';
 
 @Component({
   selector: 'app-upsert-blog-tpml',
@@ -22,7 +15,7 @@ export class UpsertBlogTpmlComponent {
   _item!: GetBlogEditData;
   file: File | null = null;
 
-  @Input() titlePage: string = 'Blog Detail';
+  @Input() titlePage: string = 'Blog';
 
   @Input() set item(data: GetBlogEditData | any) {
     if (!!data.data?.id) {

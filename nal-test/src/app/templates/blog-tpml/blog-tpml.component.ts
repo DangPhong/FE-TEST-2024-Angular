@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IEmitPageChange } from 'src/app/component/pagination/pagination.i';
+import { IEmitPageChange } from '../../component/pagination/pagination.i';
 import {
   GetBlogsData,
   ItemsBlogData,
   PaginationData,
-} from 'src/app/stores/blogs';
+} from '../../stores/blogs';
 
 @Component({
   selector: 'app-blog-tpml',

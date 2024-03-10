@@ -1,4 +1,4 @@
-export interface IEmitPageChange{
-    pageSize: number;
-    page: number;
+export interface IEmitPageChange {
+  pageSize: number;
+  page: number;
 }

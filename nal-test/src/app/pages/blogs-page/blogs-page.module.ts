@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogsPageComponent } from './blogs-page.component';
 import { EffectsModule } from '@ngrx/effects';
-import { BlogTpmlModule } from 'src/app/templates/blog-tpml/blog-tpml.module';
-import { StoreModule } from '@ngrx/store';
-import { blogsFeatureKey, blogsReducer } from 'src/app/stores/blogs';
-import { LoadingModule } from 'src/app/component/loading/loading.module';
+import { BlogTpmlModule } from '../../templates/blog-tpml/blog-tpml.module';
+import { LoadingModule } from '../../component/loading/loading.module';
 const routes: Routes = [
   {
     path: '',
@@ -27,7 +25,6 @@ export class BlogsRoutingModule {}
     BlogsRoutingModule,
     EffectsModule,
     BlogTpmlModule,
-    // StoreModule.forFeature(blogsFeatureKey, blogsReducer),
   ],
 })
 export class BlogsPageModule {}

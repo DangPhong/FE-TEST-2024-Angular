@@ -8,7 +8,7 @@ import {
   RequestBodyUpsertData,
   upsertBlogFailure,
   upsertBlogSuccess,
-} from 'src/app/stores/blog-detail';
+} from '../../stores/blog-detail';
 import { BlogDetailService } from '../../services/blog-detail/blog-detail.service';
 
 @Component({

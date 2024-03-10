@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { PaginationData } from 'src/app/stores/blogs';
 import { IEmitPageChange } from './pagination.i';
+import { PaginationData } from '../../stores/blogs/blogs.model';
 
 @Component({
   selector: 'app-pagination',
@@ -13,7 +13,7 @@ export class PaginationComponent {
 
   @Input() set items(data: PaginationData) {
     if (data.total > 0) {
-      this._items = {...data};
+      this._items = { ...data };
     }
   }
 
