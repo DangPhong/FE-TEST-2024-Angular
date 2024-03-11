@@ -32,11 +32,16 @@
   <div class="form-group">
     <label for="exampleInputURLImage">Image</label>
     <div>
+      <img
+        class="d-block img-fluid"
+        [src]="formGroup.value.image"
+        *ngIf="formGroup.value.image"
+        alt="image"
+      />
       <input
         type="file"
         id="exampleInputURLImage"
         (change)="uploadFile($event)"
-        formControlName="image"
       />
     </div>
   </div>
