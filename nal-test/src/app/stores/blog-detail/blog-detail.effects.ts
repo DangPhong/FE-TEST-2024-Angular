@@ -51,11 +51,4 @@ export class BlogDetailEffects {
       })
     )
   );
-
-  public upsertBlogSuccess = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(blogDetailActions.upsertBlogSuccess),
-      map(() => blogsActions.getBlogs(paramRequest))
-    );
-  });
 }
