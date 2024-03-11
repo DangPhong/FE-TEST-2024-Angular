@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {
   GetBlogEditData,
@@ -42,7 +48,7 @@ export class UpsertBlogTpmlComponent {
     value: RequestBodyUpsertData;
   }>();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef) {
     this.formGroup = this.fb.group({
       id: ['', []],
       title: ['', Validators.required],
@@ -72,7 +78,20 @@ export class UpsertBlogTpmlComponent {
   }
 
   uploadFile(event: any) {
-    let file: File = event.target.files[0];
-    this.file = file;
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        this.formGroup.patchValue({
+          image: reader.result,
+        });
+        let file: File = event.target.files[0];
+        this.file = file;
+        // need to run CD since file load runs outside of zone
+        this.cd.markForCheck();
+      };
+    }
   }
 }
