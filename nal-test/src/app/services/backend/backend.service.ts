@@ -64,7 +64,7 @@ export class BackendService {
     }
 
     if (!!id) {
-      return this.httpClient.put<UpsertResponse>(`blogs/${id}`, rqBody);
+      return this.httpClient.put<UpsertResponse>(endPoint + `/${id}`, rqBody);
     }
     return this.httpClient.post<UpsertResponse>(endPoint, rqBody);
   }
