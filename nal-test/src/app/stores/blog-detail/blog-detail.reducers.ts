@@ -4,6 +4,7 @@ import {
   getBlogDetail,
   getBlogDetailFailure,
   getBlogDetailSuccess,
+  upsertBlog,
   upsertBlogFailure,
   upsertBlogSuccess,
 } from './blog-detail.actions';
@@ -51,7 +52,7 @@ export const initialState: BlogDetailState = {
 
 export const blogDetailReducer = createReducer<BlogDetailState>(
   initialState,
-  on(getBlogDetail, (state) => {
+  on(getBlogDetail, upsertBlog, (state) => {
     return {
       ...state,
       isLoading: true,

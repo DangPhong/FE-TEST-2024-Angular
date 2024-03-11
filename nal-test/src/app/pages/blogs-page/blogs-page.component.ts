@@ -1,20 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, take, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { BlogsService } from '../../services/blogs/blogs.service';
 import { EType } from './blog.page.i';
-import { ActionsSubject } from '@ngrx/store';
-import { ofType } from '@ngrx/effects';
 import { GetBlogsRqParam } from '../../services/backend/backend.service.i';
 import { IEmitPageChange } from '../../component/pagination/pagination.i';
-import {
-  GetBlogsData,
-  getBlogsFailure,
-  getBlogsSuccess,
-  deleteBlogSuccess,
-  deleteBlogFailure,
-  initialGetBlogsData,
-} from '../../stores/blogs';
+import { GetBlogsData, initialGetBlogsData } from '../../stores/blogs';
 
 @Component({
   selector: 'app-blogs-page',
@@ -39,13 +30,8 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
     key: 'id',
     direction: 'asc',
   };
-  isLoading = true;
-  constructor(
-    private router: Router,
-    private blogServices: BlogsService,
-
-    private actionListener$: ActionsSubject
-  ) {}
+  isLoading = false;
+  constructor(private router: Router, private blogServices: BlogsService) {}
 
   ngOnInit(): void {
     this.blogServices.fetchBlogData(this.paramRequest);
@@ -59,36 +45,11 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
         }
       });
 
-    this.actionListener$
-      .pipe(ofType(getBlogsFailure), take(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 0);
-      });
-
-    this.actionListener$
-      .pipe(ofType(getBlogsSuccess), take(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 0);
-      });
-
-    this.actionListener$
-      .pipe(ofType(deleteBlogSuccess), take(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 0);
-      });
-
-    this.actionListener$
-      .pipe(ofType(deleteBlogFailure), take(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 0);
+    this.blogServices
+      .getIsLoading()
+      .pipe(takeUntil(this.notifier))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
       });
   }
 
@@ -109,7 +70,6 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       offset: pagination.pageSize,
     };
 
-    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
@@ -119,7 +79,6 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       search: value,
     };
 
-    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
@@ -135,21 +94,26 @@ export class BlogsPageComponent implements OnInit, OnDestroy {
       sort_direction: this.sortObject.direction,
     };
 
-    this.isLoading = true;
     this.blogServices.fetchBlogData(paramRequest);
   }
 
   addNewBlogDetail(value: { action: string; id?: number }) {
     const { action, id } = value;
-    if (action === 'edit') {
-      this.router.navigateByUrl(`${'edit-blog'}/${id}`);
-    } else if (action === 'create') {
-      this.router.navigateByUrl(`${'create-blog'}`);
-    } else if (action === 'view') {
-      this.router.navigateByUrl(`${'blog'}/${id}`);
-    } else {
-      this.isLoading = true;
-      if (!!id) this.blogServices.deleteBlog(id);
+
+    switch (action) {
+      case 'edit':
+        this.router.navigateByUrl(`${'edit-blog'}/${id}`);
+        break;
+      case 'create':
+        this.router.navigateByUrl(`${'create-blog'}`);
+        break;
+      case 'view':
+        this.router.navigateByUrl(`${'blog'}/${id}`);
+        break;
+
+      default:
+        if (!!id) this.blogServices.deleteBlog(id);
+        break;
     }
   }
 }

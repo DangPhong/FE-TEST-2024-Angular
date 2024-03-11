@@ -2,11 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ofType } from '@ngrx/effects';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { Observable, of, Subject, take } from 'rxjs';
+import { Observable, of, Subject, take, takeUntil } from 'rxjs';
 
 import {
   RequestBodyUpsertData,
-  upsertBlogFailure,
   upsertBlogSuccess,
 } from '../../stores/blog-detail';
 import { BlogDetailService } from '../../services/blog-detail/blog-detail.service';
@@ -20,7 +19,7 @@ export class UpsertBlogPageComponent implements OnInit, OnDestroy {
   item!: Observable<any>;
   notifier = new Subject();
 
-  isLoading = true;
+  isLoading = false;
   constructor(
     private route: ActivatedRoute,
     private service: BlogDetailService,
@@ -39,10 +38,8 @@ export class UpsertBlogPageComponent implements OnInit, OnDestroy {
     this.route.paramMap.subscribe((params: any) => {
       if (!!params?.params?.id) {
         this.service.fetchBlogDetailData(params?.params?.id);
-        this.isLoading = false;
       } else {
         this.service.clearStore();
-        this.isLoading = false;
       }
     });
 
@@ -52,24 +49,21 @@ export class UpsertBlogPageComponent implements OnInit, OnDestroy {
       .pipe(ofType(upsertBlogSuccess), take(1))
       .subscribe(() => {
         setTimeout(() => {
-          this.isLoading = false;
           this.router.navigate(['blogs']);
         }, 500);
       });
 
-    this.actionListener$
-      .pipe(ofType(upsertBlogFailure), take(1))
-      .subscribe(() => {
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 500);
+    this.service
+      .getIsLoading()
+      .pipe(takeUntil(this.notifier))
+      .subscribe((isLoading) => {
+        this.isLoading = isLoading;
       });
   }
 
   upsertBlog(event: { action: string; value: RequestBodyUpsertData }) {
     const { action, value } = event;
 
-    this.isLoading = true;
     this.service.upsertBlog(value);
   }
 }

@@ -5,9 +5,6 @@ import * as blogDetailActions from './blog-detail.actions';
 import { BackendService } from '../../services/backend/backend.service';
 import { GetBlogResponseFailure, GetBlogDetailData } from './blog-detail.model';
 import { UpsertResponse } from '../../services/backend/backend.service.i';
-import { paramRequest } from '../blogs';
-
-import * as blogsActions from '../blogs/blogs.actions';
 
 @Injectable()
 export class BlogDetailEffects {
